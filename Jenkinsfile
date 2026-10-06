@@ -27,12 +27,11 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                echo 'Deploy stage ready...'
-            }
-        }
+    steps {
+        echo 'Deploying website...'
+        sh 'rsync -av --delete --exclude ".git" --exclude "Jenkinsfile" ./ /var/www/html/'
     }
-
+}
     post {
         success {
             echo '✅ CI/CD Pipeline completed successfully!'
